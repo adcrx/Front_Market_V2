@@ -6,7 +6,7 @@ import "../assets/css/ResumenCompra.css";
 import "../assets/css/MisCompras.css";
 
 const MisCompras = () => {
-  const { usuario } = useContext(AuthContext); 
+  const { usuario } = useContext(AuthContext);
   const [compras, setCompras] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -19,7 +19,9 @@ const MisCompras = () => {
         const response = await fetch(
           `https://backend-market-8jdy.onrender.com/pedidos/usuario/${usuario.usuario.id}`
         );
+
         const data = await response.json();
+        console.log("Compras recibidas:", data);
         setCompras(data);
       } catch (error) {
         console.error("Error al obtener las compras:", error);
@@ -51,32 +53,15 @@ const MisCompras = () => {
             <div key={index} className="bloque-compra">
               <div className="compra-header">
                 <h3>Compra #{compra.id}</h3>
-                <span className={`estado ${compra.estado.toLowerCase()}`}>
-                  {compra.estado}
+                <span className={`estado ${compra.status.toLowerCase()}`}>
+                  {compra.status}
                 </span>
               </div>
 
-              <p>Fecha: {new Date(compra.fecha).toLocaleDateString()}</p>
-
-              <div className="productos-comprados">
-                {compra.productos.map((item) => (
-                  <div key={item.id} className="producto-item">
-                    <img
-                      src={item.imagen || item.image}
-                      alt={item.title || item.titulo}
-                    />
-                    <div className="producto-info">
-                      <h4>{item.title || item.titulo}</h4>
-                      <p>TALLA: {item.talla || "S"}</p>
-                      <p>CANTIDAD: {item.cantidad}</p>
-                      <p>PRECIO: ${item.precio}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <p>Fecha: {new Date(compra.created_at).toLocaleDateString("es-CL")}</p>
 
               <div className="resumen-total">
-                <h4>Total: ${compra.total}</h4>
+                <h4>Total: ${Number(compra.total).toLocaleString("es-CL")}</h4>
               </div>
             </div>
           ))
