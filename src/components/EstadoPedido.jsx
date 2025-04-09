@@ -14,7 +14,7 @@ export default function MisPedidos() {
     if (!usuario) return;
     const vendedorId = usuario.usuario.id;
 
-    fetch(`http://localhost:3000/pedidos?vendedor_id=${vendedorId}`)
+    fetch(`https://backend-market-8jdy.onrender.com/pedidos?vendedor_id=${vendedorId}`)
       .then((response) => response.json())
       .then((data) => {
         if (Array.isArray(data)) {
@@ -32,7 +32,7 @@ export default function MisPedidos() {
 
   const cambiarEstado = async (id, nuevoEstado) => {
     try {
-      const response = await fetch(`http://localhost:3000/pedidos/${id}/estado`, {
+      const response = await fetch(`https://backend-market-8jdy.onrender.com/pedidos/${id}/estado`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

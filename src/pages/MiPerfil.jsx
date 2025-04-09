@@ -28,7 +28,7 @@ function MiPerfil() {
 
       console.log(`Buscando publicaciones para el user ID: ${userId}`);
 
-      axios.get(`http://localhost:3000/productos`, { // Endpoint correcto para obtener productos
+      axios.get(`https://backend-market-8jdy.onrender.com/productos`, { // Endpoint correcto para obtener productos
         params: {
           vendedor_id: userId // Filtramos por el ID del vendedor (usuario logueado)
         }

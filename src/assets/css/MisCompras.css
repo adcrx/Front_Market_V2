@@ -1,0 +1,26 @@
+.productos-comprados {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .producto-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-top: 1px solid #ddd;
+    padding-top: 1rem;
+  }
+  
+  .producto-imagen {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  .producto-detalle p {
+    margin: 2px 0;
+  }
+  

@@ -10,7 +10,7 @@ function GaleriaDestacados({ search }) {
   useEffect(() => {
     const fetchProductos = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/productos");
+        const response = await axios.get("https://backend-market-8jdy.onrender.com/productos");
         const productos = response.data.data || response.data;
 
         console.log(productos);

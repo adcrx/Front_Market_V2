@@ -18,7 +18,7 @@ function GaleriaPublicaciones({ search }) {
   useEffect(() => {
     const fetchProductos = async () => {
       try {
-        const backendRes = await axios.get("http://localhost:3000/productos");
+        const backendRes = await axios.get("https://backend-market-8jdy.onrender.com/productos");
         console.log('Datos recibidos del backend:', backendRes.data); // Verifica los datos aquí
         const productosBackend = backendRes.data.data || backendRes.data;
         setProductos(productosBackend);

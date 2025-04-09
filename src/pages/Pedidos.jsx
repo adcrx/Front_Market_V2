@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import SidebarPerfil from "../components/SidebarPerfil";
 import { AuthContext } from "../context/AuthContext";
-import "../assets/css/pedidos.css";
+import "../assets/css/Pedidos.css";
 
 export default function MisPedidos() {
   const [pedidos, setPedidos] = useState([]);
@@ -14,7 +14,7 @@ export default function MisPedidos() {
     if (!usuario) return;
     const vendedorId = usuario.usuario.id;
 
-    fetch(`http://localhost:3000/pedidos?vendedor_id=${vendedorId}`)
+    fetch(`https://backend-market-8jdy.onrender.com/pedidos?vendedor_id=${vendedorId}`)
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
@@ -39,7 +39,7 @@ export default function MisPedidos() {
 
   const handleStatusChange = async (pedidoId, nuevoEstado) => {
     try {
-      const res = await fetch(`http://localhost:3000/pedidos/${pedidoId}/estado`, {
+      const res = await fetch(`https://backend-market-8jdy.onrender.com/pedidos/${pedidoId}/estado`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ estado: nuevoEstado }), // <<--- CAMBIO AQUÍ
