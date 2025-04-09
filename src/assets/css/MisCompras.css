@@ -53,3 +53,16 @@
     color: #333;
   }
   
+  .producto-info {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .producto-imagen {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  

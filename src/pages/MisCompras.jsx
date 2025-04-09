@@ -5,7 +5,7 @@ import { AuthContext } from "../context/AuthContext";
 import "../assets/css/MisCompras.css";
 
 const MisCompras = () => {
-  const { usuario } = useContext(AuthContext); 
+  const { usuario } = useContext(AuthContext);
   const [compras, setCompras] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -41,23 +41,45 @@ const MisCompras = () => {
         ) : compras.length === 0 ? (
           <div className="sin-compras">
             <p>No has realizado ninguna compra.</p>
-            <button className="btn-ver-productos" onClick={() => navigate("/publicaciones")}>
+            <button
+              className="btn-ver-productos"
+              onClick={() => navigate("/publicaciones")}
+            >
               Revisa nuestros productos aquí
             </button>
           </div>
         ) : (
-          compras.map((compra) => (
-            <div key={compra.id} className="tarjeta-compra">
-              <div className="compra-encabezado">
-                <h3>Compra #{compra.id}</h3>
-                <span className={`estado ${compra.status ? compra.status.toLowerCase() : "pendiente"}`}>
-                  {compra.status || "Pendiente"}
-                </span>
+          compras.map((compra) =>
+            compra.productos?.map((producto, index) => (
+              <div key={`${compra.id}-${index}`} className="tarjeta-compra">
+                <div className="compra-encabezado">
+                  <div className="producto-info">
+                    <img
+                      src={producto.imagen || producto.image || "https://via.placeholder.com/80"}
+                      alt={producto.titulo || "Producto"}
+                      className="producto-imagen"
+                    />
+                    <div>
+                      <h3>{producto.titulo}</h3>
+                      <p className="fecha-compra">
+                        Fecha: {new Date(compra.created_at).toLocaleDateString("es-CL")}
+                      </p>
+                      <p className="cantidad-compra">
+                        Cantidad: {producto.cantidad}
+                      </p>
+                    </div>
+                  </div>
+                  <span className={`estado ${compra.status?.toLowerCase() || "pendiente"}`}>
+                    {compra.status || "Pendiente"}
+                  </span>
+                </div>
+
+                <h4 className="total-compra">
+                  Total: ${Number(compra.total).toLocaleString("es-CL")}
+                </h4>
               </div>
-              <p className="fecha-compra">Fecha: {new Date(compra.created_at).toLocaleDateString("es-CL")}</p>
-              <h4 className="total-compra">Total: ${Number(compra.total).toLocaleString("es-CL")}</h4>
-            </div>
-          ))
+            ))
+          )
         )}
       </div>
     </div>
