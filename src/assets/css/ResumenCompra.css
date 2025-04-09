@@ -1,0 +1,70 @@
+/* Estilo para el contenedor principal */
+.perfil-contenedor {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f4f4; /* Fondo gris para todo el perfil */
+    padding: 0;
+    width: 100%;
+  }
+  
+  /* Estilo del resumen de compra */
+  .resumen-compra-main {
+    margin-left: 0; /* Elimina el margen para que empiece desde el lado del sidebar */
+    padding: 2rem;
+    background-color: #ffffff; /* Fondo blanco */
+    box-sizing: border-box;
+    width: calc(100% - 250px); /* Esto mantiene el tamaño del sidebar y asegura que el contenido ocupe el resto */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  
+  .resumen-compra-main h2 {
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  .resumen-compra-main .productos-comprados {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .resumen-compra-main .producto-item {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  
+  .resumen-compra-main .producto-item img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .resumen-compra-main .producto-info {
+    flex: 1;
+  }
+  
+  .resumen-compra-main .resumen-total {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    font-weight: bold;
+  }
+  
+  .success-message {
+    background-color: #28a745;
+    color: white;
+    padding: 1rem;
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+  
+  /* Aseguramos que no haya márgenes innecesarios */
+  .container-fluid {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  
