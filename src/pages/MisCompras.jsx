@@ -16,10 +16,33 @@ const MisCompras = () => {
 
       try {
         const response = await fetch(
-          `https://backend-market-8jdy.onrender.com/pedidos/usuario/${usuario.usuario.id}`
+          `https://backend-market-8jdy.onrender.com/pedidos?vendedor_id=&usuario_id=${usuario.usuario.id}`
         );
         const data = await response.json();
-        setCompras(data);
+
+        // Agrupar productos por compra
+        const comprasAgrupadas = {};
+
+        data.forEach((item) => {
+          if (!comprasAgrupadas[item.id]) {
+            comprasAgrupadas[item.id] = {
+              id: item.id,
+              created_at: item.created_at,
+              status: item.status,
+              total: item.total,
+              productos: [],
+            };
+          }
+
+          comprasAgrupadas[item.id].productos.push({
+            titulo: item.titulo,
+            imagen: item.imagen,
+            cantidad: item.cantidad,
+            precio: item.precio_unitario,
+          });
+        });
+
+        setCompras(Object.values(comprasAgrupadas));
       } catch (error) {
         console.error("Error al obtener las compras:", error);
       } finally {
@@ -49,37 +72,44 @@ const MisCompras = () => {
             </button>
           </div>
         ) : (
-          compras.map((compra) =>
-            compra.productos?.map((producto, index) => (
-              <div key={`${compra.id}-${index}`} className="tarjeta-compra">
-                <div className="compra-encabezado">
-                  <div className="producto-info">
+          compras.map((compra) => (
+            <div key={compra.id} className="tarjeta-compra">
+              <div className="compra-encabezado">
+                <span
+                  className={`estado ${
+                    compra.status ? compra.status.toLowerCase() : "pendiente"
+                  }`}
+                >
+                  {compra.status || "Pendiente"}
+                </span>
+              </div>
+
+              <p className="fecha-compra">
+                Fecha: {new Date(compra.created_at).toLocaleDateString("es-CL")}
+              </p>
+
+              <div className="productos-comprados">
+                {compra.productos.map((producto, index) => (
+                  <div key={index} className="producto-item">
                     <img
-                      src={producto.imagen || producto.image || "https://via.placeholder.com/80"}
-                      alt={producto.titulo || "Producto"}
+                      src={producto.imagen || "https://via.placeholder.com/80"}
+                      alt={producto.titulo}
                       className="producto-imagen"
                     />
-                    <div>
-                      <h3>{producto.titulo}</h3>
-                      <p className="fecha-compra">
-                        Fecha: {new Date(compra.created_at).toLocaleDateString("es-CL")}
-                      </p>
-                      <p className="cantidad-compra">
-                        Cantidad: {producto.cantidad}
-                      </p>
+                    <div className="producto-detalle">
+                      <p><strong>{producto.titulo}</strong></p>
+                      <p>Cantidad: {producto.cantidad}</p>
+                      <p>Precio: ${Number(producto.precio).toLocaleString("es-CL")}</p>
                     </div>
                   </div>
-                  <span className={`estado ${compra.status?.toLowerCase() || "pendiente"}`}>
-                    {compra.status || "Pendiente"}
-                  </span>
-                </div>
-
-                <h4 className="total-compra">
-                  Total: ${Number(compra.total).toLocaleString("es-CL")}
-                </h4>
+                ))}
               </div>
-            ))
-          )
+
+              <div className="resumen-total">
+                <h4>Total: ${Number(compra.total).toLocaleString("es-CL")}</h4>
+              </div>
+            </div>
+          ))
         )}
       </div>
     </div>
