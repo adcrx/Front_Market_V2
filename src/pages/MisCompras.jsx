@@ -15,9 +15,8 @@ const MisCompras = () => {
       if (!usuario?.usuario?.id) return;
 
       try {
-        const response = await fetch(
-          `https://backend-market-8jdy.onrender.com/pedidos?vendedor_id=&usuario_id=${usuario.usuario.id}`
-        );
+        const response = await fetch(`https://backend-market-8jdy.onrender.com/pedidos?usuario_id=${usuario.usuario.id}`)
+
         const data = await response.json();
 
         // Agrupar productos por compra
