@@ -22,7 +22,7 @@ function DetallePublicacion() {
 
   // Cargar el producto
   useEffect(() => {
-    axios.get(`http://localhost:3000/productos/${id}`)
+    axios.get(`https://backend-market-8jdy.onrender.com/productos/${id}`)
       .then((res) => {
         // Manejar ambas estructuras de respuesta posibles
         const productoData = res.data.data || res.data;

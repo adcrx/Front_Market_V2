@@ -20,7 +20,7 @@ function EditarProducto() {
   useEffect(() => {
     const fetchProducto = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/productos/${id}`);
+        const response = await axios.get(`https://backend-market-8jdy.onrender.com/productos/${id}`);
         setProducto(response.data);
       } catch (error) {
         console.error("Error al obtener el producto", error);
@@ -33,7 +33,7 @@ function EditarProducto() {
   useEffect(() => {
     const fetchCategorias = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/categorias`);
+        const response = await axios.get(`https://backend-market-8jdy.onrender.com/categorias`);
         setCategorias(response.data);
       } catch (error) {
         console.error("Error al obtener las categorías", error);
@@ -51,7 +51,7 @@ function EditarProducto() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:3000/productos/${id}`, producto);
+      await axios.put(`https://backend-market-8jdy.onrender.com/productos/${id}`, producto);
       console.log("Producto actualizado:", producto);
       alert("Producto actualizado con éxito");
       navigate(`/productos/${id}`); // Redirigir a la página del producto

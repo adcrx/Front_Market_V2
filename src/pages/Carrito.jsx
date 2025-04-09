@@ -25,7 +25,7 @@ function Carrito({}) {
       // First update stock for all products
       await Promise.all(
         carrito.map(async (item) => {
-          await axios.put(`http://localhost:3000/productos/${item.id}`, {
+          await axios.put(`https://backend-market-8jdy.onrender.com/productos/${item.id}`, {
             ...item,
             stock: (item.stock || item.cantidad_disponible) - item.cantidad,
           });
@@ -33,7 +33,7 @@ function Carrito({}) {
       );
 
       // Then create the order
-      const response = await fetch("http://localhost:3000/pedidos/crear", {
+      const response = await fetch("https://backend-market-8jdy.onrender.com/pedidos/crear", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

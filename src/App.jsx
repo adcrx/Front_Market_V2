@@ -11,9 +11,11 @@ import Carrito from './pages/Carrito';
 import Footer from './components/Footer';
 import Publicaciones from './pages/Publicaciones';
 import Pedidos from './pages/Pedidos';
-import ResumenCompra from './components/ResumenCompra';  // Esto se añade en tu versión
-import CardProducto from './components/CardProducto';  // Esto se añade en la versión remota
-import EditarProducto from './components/EditarProducto';  // Esto se añade en la versión remota
+import ResumenCompra from './components/ResumenCompra'; 
+import CardProducto from './components/CardProducto'; 
+import EditarProducto from './components/EditarProducto'; 
+import MisCompras from './pages/MisCompras'; 
+
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
             </RutaProtegida>
           }
         />
+        <Route path="/compras" element={<MisCompras />} />
+
         <Route path="/publicacion/:id" element={<DetallePublicacion />} />
         <Route
           path="/carrito"

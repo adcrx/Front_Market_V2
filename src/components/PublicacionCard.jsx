@@ -19,7 +19,7 @@ function PublicacionCard({ publicacion }) {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:3000/productos/${publicacion.id}`);
+      await axios.delete(`https://backend-market-8jdy.onrender.com/productos/${publicacion.id}`);
       alert("Publicación eliminada con éxito");
     } catch (err) {
       setError("Error al eliminar la publicación");

@@ -67,7 +67,7 @@ function FormularioPublicacion() {
     };
   
     axios
-      .post("http://localhost:3000/productos", productoFinal, {
+      .post("https://backend-market-8jdy.onrender.com/productos", productoFinal, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
