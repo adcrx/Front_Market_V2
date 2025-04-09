@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import SidebarPerfil from "../components/SidebarPerfil";
 import { AuthContext } from "../context/AuthContext";
-import "../assets/css/pedidos.css";
+import "../assets/css/Pedidos.css";
 
 export default function MisPedidos() {
   const [pedidos, setPedidos] = useState([]);
