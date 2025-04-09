@@ -2,11 +2,10 @@ import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import SidebarPerfil from "../components/SidebarPerfil";
 import { AuthContext } from "../context/AuthContext";
-import "../assets/css/ResumenCompra.css";
 import "../assets/css/MisCompras.css";
 
 const MisCompras = () => {
-  const { usuario } = useContext(AuthContext);
+  const { usuario } = useContext(AuthContext); 
   const [compras, setCompras] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -19,9 +18,7 @@ const MisCompras = () => {
         const response = await fetch(
           `https://backend-market-8jdy.onrender.com/pedidos/usuario/${usuario.usuario.id}`
         );
-
         const data = await response.json();
-        console.log("Compras recibidas:", data);
         setCompras(data);
       } catch (error) {
         console.error("Error al obtener las compras:", error);
@@ -36,7 +33,7 @@ const MisCompras = () => {
   return (
     <div className="perfil-contenedor">
       <SidebarPerfil />
-      <div className="resumen-compra-main">
+      <div className="compras-contenido">
         <h2>Mis Compras</h2>
 
         {loading ? (
@@ -49,20 +46,16 @@ const MisCompras = () => {
             </button>
           </div>
         ) : (
-          compras.map((compra, index) => (
-            <div key={index} className="bloque-compra">
-              <div className="compra-header">
+          compras.map((compra) => (
+            <div key={compra.id} className="tarjeta-compra">
+              <div className="compra-encabezado">
                 <h3>Compra #{compra.id}</h3>
-                <span className={`estado ${compra.status.toLowerCase()}`}>
-                  {compra.status}
+                <span className={`estado ${compra.status ? compra.status.toLowerCase() : "pendiente"}`}>
+                  {compra.status || "Pendiente"}
                 </span>
               </div>
-
-              <p>Fecha: {new Date(compra.created_at).toLocaleDateString("es-CL")}</p>
-
-              <div className="resumen-total">
-                <h4>Total: ${Number(compra.total).toLocaleString("es-CL")}</h4>
-              </div>
+              <p className="fecha-compra">Fecha: {new Date(compra.created_at).toLocaleDateString("es-CL")}</p>
+              <h4 className="total-compra">Total: ${Number(compra.total).toLocaleString("es-CL")}</h4>
             </div>
           ))
         )}
