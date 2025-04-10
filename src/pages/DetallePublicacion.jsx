@@ -26,6 +26,7 @@ function DetallePublicacion() {
       .then((res) => {
         // Manejar ambas estructuras de respuesta posibles
         const productoData = res.data.data || res.data;
+        console.log("Datos del producto recibidos:", productoData);
         setProducto(productoData);
         
         // Comprobar qué propiedad contiene la imagen
@@ -119,5 +120,6 @@ function DetallePublicacion() {
     </div>
   );
 }
+
 
 export default DetallePublicacion;
