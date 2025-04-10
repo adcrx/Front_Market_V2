@@ -52,7 +52,6 @@ function EditarProducto() {
     e.preventDefault();
     try {
       await axios.put(`https://backend-market-8jdy.onrender.com/productos/${id}`, producto);
-      console.log("Producto actualizado:", producto);
       alert("Producto actualizado con éxito");
       navigate(`/productos/${id}`); // Redirigir a la página del producto
     } catch (error) {

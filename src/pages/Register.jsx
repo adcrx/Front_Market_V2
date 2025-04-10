@@ -13,7 +13,7 @@ const Register = () => {
     email: '',
     password: '',
     direccion: '',
-    avatar: ''  // Nuevo campo para almacenar el avatar seleccionado
+    avatar: ''
   });
 
   const handleChange = (e) => {
@@ -38,16 +38,14 @@ const Register = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(form) // Aquí mandas el form con el avatar (nombre del avatar, no la URL)
+        body: JSON.stringify(form)
       });
 
       if (!response.ok) {
         throw new Error('Error en el registro');
       }
 
-      const data = await response.json();
-      console.log('Usuario registrado:', data);
-      // Redirigir al login después del registro exitoso
+      await response.json();
       window.location.href = '/login';
     } catch (error) {
       console.error('Error:', error);
@@ -103,7 +101,6 @@ const Register = () => {
             className="input-field"
           />
 
-          {/* Opciones de Avatar */}
           <div className="avatar-selection">
             <label htmlFor="avatar">Selecciona un avatar:</label>
             <div className="avatar-options">
@@ -134,12 +131,13 @@ const Register = () => {
             </div>
           </div>
 
-          {/* Botón de registro */}
           <button type="button" onClick={handleSubmit} className="submit-btn">Registrarme</button>
 
           <p className="tienes-cuenta">
             <span className="span">¿Tienes cuenta? </span>
-            <span className="text-wrapper-3"><Link to="/login" className="link-login">Ingresa aquí</Link></span> 
+            <span className="text-wrapper-3">
+              <Link to="/login" className="link-login">Ingresa aquí</Link>
+            </span> 
           </p>
         </div>
       </div>

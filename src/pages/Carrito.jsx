@@ -50,8 +50,7 @@ function Carrito({}) {
       });
 
       if (!response.ok) throw new Error("Error al crear el pedido");
-      const data = await response.json();
-      console.log(data);
+    
 
       setShowSuccessMessage(true);
       vaciarCarrito();
